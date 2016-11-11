@@ -5,14 +5,16 @@
 FROM youpin/ubuntu
 MAINTAINER Leo <jiangwenhua@yoyohr.com>
 
-
+COPY nodejs_setup_6_x ~
 
 RUN set -ex \
     && cd ~ \
-    && curl -fSL "https://deb.nodesource.com/setup_6.x" -o nodejs_setup_6_x \
     && sudo chmod 755 nodejs_setup_6_x \
-    && sudo nodejs_setup_6_x \
-    && sudo apt-get install -y nodejs \
+    && sudo ./nodejs_setup_6_x \
+    && DEBIAN_FRONTEND="noninteractive" \
+        sudo apt-get install -y nodejs \
+        build-essential \
+        --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
     
 CMD [ "node" ]

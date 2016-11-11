@@ -5,12 +5,11 @@
 FROM youpin/ubuntu
 MAINTAINER Leo <jiangwenhua@yoyohr.com>
 
-COPY nodejs_setup_6_x ~
+COPY nodejs_setup_6_x /usr/local/bin/
 
 RUN set -ex \
-    && cd ~ \
-    && sudo chmod 755 nodejs_setup_6_x \
-    && sudo ./nodejs_setup_6_x \
+    && sudo chmod 755 /usr/local/bin/nodejs_setup_6_x \
+    && sudo nodejs_setup_6_x \
     && DEBIAN_FRONTEND="noninteractive" \
         sudo apt-get install -y nodejs \
         build-essential \
